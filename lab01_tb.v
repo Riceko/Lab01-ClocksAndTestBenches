@@ -91,7 +91,13 @@ module lab01_tb;
         // Testing Source clock 100Hz, Tick 2Hz 
         // --------------------------------------------- 
         $write("Test Source clock 100Hz, Tick 2Hz ... ");
-        totalTests <= 1;
+        totalTests = totalTests+ 1;
+        
+        last_tick = 0;
+        transition_count = 0;
+        count = 0;
+        high_count = 0;
+        
         while(count < 1000) begin
             @(posedge clk);
             if (last_tick == 0 & tick_100_2 != last_tick) begin
@@ -116,15 +122,19 @@ module lab01_tb;
 		// Add more tests here
 
         // Re-initialize counters for each test
+       
+       
+       // Testing Source clock 100Hz, Tick 5Hz 
+        // --------------------------------------------- 
+        
+        $write("Test Source clock 100Hz, Tick 5Hz ... ");
+        totalTests = totalTests+ 1;
+        
         last_tick = 0;
         transition_count = 0;
         count = 0;
         high_count = 0;
-       
-       // Testing Source clock 100Hz, Tick 5Hz 
-        // --------------------------------------------- 
-        $write("Test Source clock 100Hz, Tick 5Hz ... ");
-        totalTests <= 1;
+        
         while(count < 1000) begin
             @(posedge clk);
             if (last_tick == 0 & tick_100_5 != last_tick) begin
@@ -147,17 +157,18 @@ module lab01_tb;
         $display("Transition count: %d", transition_count);
         
 		// Add more tests here
-
-        // Re-initialize counters for each test
+        // Testing Source clock 100Hz, Tick 50Hz 
+        
+        // --------------------------------------------- 
+        
+        $write("Test Source clock 100Hz, Tick 50Hz ... ");
+         totalTests = totalTests+ 1;
+        
         last_tick = 0;
         transition_count = 0;
         count = 0;
         high_count = 0;
-        // Testing Source clock 100Hz, Tick 5Hz 
         
-        // --------------------------------------------- 
-        $write("Test Source clock 100Hz, Tick 50Hz ... ");
-        totalTests <= 1;
         while(count < 1000) begin
             @(posedge clk);
             if (last_tick == 0 & tick_100_50 != last_tick) begin
@@ -179,13 +190,6 @@ module lab01_tb;
         $display("Load (%d/%d): %0.2f", high_count, count, 1.0 * high_count / count);
         $display("Transition count: %d", transition_count);
         
-		// Add more tests here
-
-        // Re-initialize counters for each test
-        last_tick = 0;
-        transition_count = 0;
-        count = 0;
-        high_count = 0;
         // Copy the test case above at least 2 more times to test each unit under test
         // Be sure to change the expected counts to match the configuration of the UUT
 
