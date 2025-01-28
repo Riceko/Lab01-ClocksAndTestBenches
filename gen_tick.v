@@ -16,16 +16,26 @@
 module gen_tick # ( parameter SRC_FREQ = 5000, parameter TICK_FREQ = 1) (
     input src_clk,
     input enable,
-    output tick
+    output reg tick
 );
 
 // Declare registers and wires here
-
-always @(posedge src_clk) begin
-    // put your code for the multiplier here
+ localparam integer period = SRC_FREQ / TICK_FREQ;
+ reg [31:0] count = 0;
+ always @(posedge src_clk) begin
+   if(enable)begin
+        if(count == period-1)begin
+            count <= 0;
+            tick <= 1;
+        end else begin
+            count <= count+1;
+            tick <= 0;
+            end 
+   end else begin
+    count<=0;
+    tick<=0;
+    end
 end
 
-// Change this assign statement to the actual tick value
-assign tick = src_clk;
 
 endmodule
