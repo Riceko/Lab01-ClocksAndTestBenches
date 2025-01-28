@@ -18,7 +18,9 @@ module gen_tick # ( parameter SRC_FREQ = 5000, parameter TICK_FREQ = 1) (
     input enable,
     output reg tick
 );
-
+initial begin
+    tick = 0; 
+end
 // Declare registers and wires here
  localparam integer period = SRC_FREQ / TICK_FREQ;
  reg [31:0] count = 0;
@@ -26,10 +28,9 @@ module gen_tick # ( parameter SRC_FREQ = 5000, parameter TICK_FREQ = 1) (
    if(enable)begin
         if(count == period-1)begin
             count <= 0;
-            tick <= 1;
+            tick <= ~tick;
         end else begin
             count <= count+1;
-            tick <= 0;
             end 
    end else begin
     count<=0;
