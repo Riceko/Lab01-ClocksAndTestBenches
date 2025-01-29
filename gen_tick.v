@@ -22,7 +22,7 @@ initial begin
     tick = 0; 
 end
 // Declare registers and wires here
- localparam integer period = SRC_FREQ / TICK_FREQ;
+ localparam integer period = SRC_FREQ / (2*TICK_FREQ);
  reg [31:0] count = 0;
  always @(posedge src_clk) begin
    if(enable)begin
